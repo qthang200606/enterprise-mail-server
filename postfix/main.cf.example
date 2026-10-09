@@ -1,0 +1,6 @@
+# File mẫu - KHÔNG dùng trực tiếp nếu chưa kiểm tra môi trường.
+# TODO: TV2 bổ sung cấu hình cho vkuoffice.test
+myhostname = mail.vkuoffice.test
+mydomain = vkuoffice.test
+myorigin = $mydomain
+# mydestination, inet_interfaces, relay restrictions... sẽ được cấu hình sau.

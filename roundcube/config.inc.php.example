@@ -1,0 +1,6 @@
+<?php
+// File mẫu. Không đặt password thật trong Git.
+// TODO: TV4 cấu hình database và IMAP/SMTP.
+$config['default_host'] = 'localhost';
+$config['smtp_server'] = 'localhost';
+$config['smtp_port'] = 25;

@@ -1,0 +1,3 @@
+# Thay IP_SERVER bằng IP thật của Ubuntu Mail Server
+IP_SERVER mail.vkuoffice.test mail.vkuoffice.test
+IP_SERVER vkuoffice.test vkuoffice.test

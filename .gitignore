@@ -1,0 +1,32 @@
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.crt
+secrets/
+passwords.txt
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+
+# Local VM / large artifacts
+*.iso
+*.vdi
+*.vmdk
+*.qcow2
