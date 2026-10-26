@@ -30,3 +30,13 @@ logs/
 *.vdi
 *.vmdk
 *.qcow2
+# Bỏ qua các file log
+*.log
+
+# Bỏ qua file cấu hình chứa mật khẩu thật (nếu có)
+secrets.conf
+
+# Bỏ qua thư mục build hoặc file tạm
+node_modules/
+vendor/
+.env
