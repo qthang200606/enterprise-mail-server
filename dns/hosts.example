@@ -1,3 +1,43 @@
-# Thay IP_SERVER bằng IP thật của Ubuntu Mail Server
-IP_SERVER mail.vkuoffice.test mail.vkuoffice.test
-IP_SERVER vkuoffice.test vkuoffice.test
+# ==============================================================================
+# File cấu hình ánh xạ tên miền nội bộ (Hosts File Template)
+# Dự án: Enterprise Mail Server - VKU Office
+# Tên miền mô phỏng: vkuoffice.test | mail.vkuoffice.test
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. CẤU HÌNH TRÊN UBUNTU SERVER (Đường dẫn: /etc/hosts)
+# ------------------------------------------------------------------------------
+# Mở file trên Ubuntu Server:
+#   sudo nano /etc/hosts
+#
+# Thêm hoặc cập nhật các dòng sau (Thay 192.168.56.10 bằng IP tĩnh thực tế của server):
+127.0.0.1       localhost
+127.0.1.1       mail.vkuoffice.test mail
+
+# IP tĩnh của Mail Server trỏ đến các domain nội bộ
+192.168.56.10   mail.vkuoffice.test mail
+192.168.56.10   vkuoffice.test
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+
+# ------------------------------------------------------------------------------
+# 2. CẤU HÌNH TRÊN MÁY CLIENT WINDOWS (Đường dẫn: C:\Windows\System32\drivers\etc\hosts)
+# ------------------------------------------------------------------------------
+# Các bước thực hiện trên Windows Client:
+#   1. Nhấn phím Windows, gõ "Notepad".
+#   2. Nhấp chuột phải vào Notepad -> Chọn "Run as administrator" (Chạy với quyền Quản trị viên).
+#   3. Vào File -> Open -> Đường dẫn: C:\Windows\System32\drivers\etc\hosts (Chọn All Files *.*).
+#   4. Dán 2 dòng dưới đây vào cuối file và lưu lại (Ctrl + S):
+
+192.168.56.10   mail.vkuoffice.test
+192.168.56.10   vkuoffice.test
+
+# Sau khi lưu, mở PowerShell / CMD trên Windows và chạy lệnh xóa cache DNS:
+#   ipconfig /flushdns
+#   ping mail.vkuoffice.test

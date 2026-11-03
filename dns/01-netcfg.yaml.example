@@ -1,0 +1,46 @@
+# Cấu hình IP tĩnh mẫu cho Ubuntu Server trên VirtualBox
+# Vị trí đặt file trên server: /etc/netplan/01-netcfg.yaml (hoặc /etc/netplan/00-installer-config.yaml)
+#
+# LƯU Ý QUAN TRỌNG:
+# 1. File YAML không được dùng phím TAB, chỉ dùng dấu cách (khoảng trắng).
+# 2. Phân quyền bảo mật bắt buộc: sudo chmod 600 /etc/netplan/01-netcfg.yaml
+# 3. Kiểm tra tên card mạng thực tế bằng lệnh: ip link show (thường là enp0s3, enp0s8 hoặc eth0, eth1)
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    # Card mạng 1 (Adapter 1 - NAT): Dùng để Ubuntu Server kết nối ra ngoài Internet tải gói tin (apt update/install)
+    enp0s3:
+      dhcp4: true
+
+    # Card mạng 2 (Adapter 2 - Host-only Adapter): Dùng để kết nối mạng LAN nội bộ giữa máy ảo và máy thật (Client)
+    # Dải IP mặc định VirtualBox Host-Only thường là 192.168.56.x
+    enp0s8:
+      dhcp4: false
+      addresses:
+        - 192.168.56.10/24
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 1.1.1.1
+        search:
+          - vkuoffice.test
+
+# --- Hướng dẫn áp dụng trên Ubuntu Server ---
+# Bước 1: Sao chép file cấu hình:
+#   sudo cp dns/01-netcfg.yaml.example /etc/netplan/01-netcfg.yaml
+#
+# Bước 2: Chỉnh sửa tên card mạng (enp0s3, enp0s8) và địa chỉ IP cho khớp với máy:
+#   sudo nano /etc/netplan/01-netcfg.yaml
+#
+# Bước 3: Phân quyền bảo mật cho file:
+#   sudo chmod 600 /etc/netplan/01-netcfg.yaml
+#
+# Bước 4: Kiểm tra và áp dụng cấu hình:
+#   sudo netplan try      # Thử nghiệm trong 120s, tự hoàn tác nếu mất kết nối
+#   sudo netplan apply    # Áp dụng ngay lập tức
+#
+# Bước 5: Kiểm tra lại IP đã nhận thành công:
+#   ip -4 -br addr show
+
